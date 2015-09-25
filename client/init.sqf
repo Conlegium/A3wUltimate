@@ -56,7 +56,7 @@ player addEventHandler ["Killed", { _this spawn onKilled }];
 
 A3W_scriptThreads pushBack execVM "client\functions\evalManagedActions.sqf";
 
-pvar_playerRespawn = player;
+pvar_playerRespawn = [player, objNull];
 publicVariableServer "pvar_playerRespawn";
 
 //Player setup
@@ -117,14 +117,17 @@ call compile preprocessFileLineNumbers "client\functions\setupClientPVars.sqf";
 
 //client Executes
 A3W_scriptThreads pushBack execVM "client\systems\hud\playerHud.sqf";
-[] execVM "client\functions\initSurvival.sqf";
+
+if (["A3W_survivalSystem"] call isConfigOn) then
+{
+	execVM "client\functions\initSurvival.sqf";
+};
 
 [] spawn
 {
 	[] execVM "client\functions\createGunStoreMarkers.sqf";
 	[] execVM "client\functions\createGeneralStoreMarkers.sqf";
 	[] execVM "client\functions\createVehicleStoreMarkers.sqf";
-	[] execVM "client\functions\createktttStoreMarkers.sqf";
 };
 
 [] spawn playerSpawn;
@@ -134,9 +137,7 @@ A3W_scriptThreads pushBack execVM "addons\Lootspawner\LSclientScan.sqf";
 [] execVM "client\functions\drawPlayerIcons.sqf";
 [] execVM "addons\far_revive\FAR_revive_init.sqf";
 [] execVM "addons\camera\functions.sqf";
-
-//catching Animals
-[] execVM "client\functions\checkAnimal.sqf";
+[] execVM "addons\UAV_Control\functions.sqf";
 
 call compile preprocessFileLineNumbers "client\functions\generateAtmArray.sqf";
 [] execVM "client\functions\drawPlayerMarkers.sqf";

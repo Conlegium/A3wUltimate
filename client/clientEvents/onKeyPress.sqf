@@ -1,4 +1,4 @@
-﻿// ******************************************************************************************
+// ******************************************************************************************
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Version: 1.0
@@ -25,21 +25,6 @@ switch (true) do
 		execVM "client\systems\adminPanel\checkAdmin.sqf";
 	};
 
-		
-	// AltGr key
-	case (_key == 184):
-	{
-		_veh = vehicle player;
-
-		if (alive player && _veh != player) then
-		{
-			if (_veh isKindOf 'Air') then
-			{
-				[[], fn_emergencyEject] execFSM "call.fsm";
-			};
-		};
-	};
-	
 	// Tilde (key above Tab)
 	case (_key == 41):
 	{
@@ -123,6 +108,26 @@ if (!_handled && _key in actionKeys "GetOut") then
 	};
 };
 
+// Scoreboard
+if (!_handled && _key in actionKeys "NetworkStats") then
+{
+	if (_key != 25 || // 25 = P
+	   ((!_ctrl || {!(486539289 in actionKeys "NetworkPlayers") && isNil "TFAR_fnc_TaskForceArrowheadRadioInit"}) && // 486539289 = Left Ctrl + P
+	   (!_shift || {!(704643042 in actionKeys "NetworkPlayers")}))) then // 704643042 = Left Shift + P
+	{
+		if (alive player && isNull (uiNamespace getVariable ["ScoreGUI", displayNull])) then
+		{
+			call loadScoreboard;
+		};
 
+		_handled = true;
+	};
+};
+
+// Push-to-talk
+if (!_handled && _key in (actionKeys "PushToTalk" + actionKeys "PushToTalkAll")) then
+{
+	[true] call fn_voiceChatControl;
+};
 
 _handled

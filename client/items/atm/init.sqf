@@ -10,7 +10,6 @@ _path = "client\items\atm";
 mf_items_atm_can_access = [_path, "can_access.sqf"] call mf_compile;
 
 mf_items_atm_access = [_path, "access.sqf"] call mf_compile;
-mf_items_atm_buy_account = [_path, "buy_account.sqf"] call mf_compile;
 mf_items_atm_refresh = [_path, "refresh.sqf"] call mf_compile;
 mf_items_atm_refresh_amounts = [_path, "refresh_amounts.sqf"] call mf_compile;
 mf_items_atm_select_account = [_path, "select_account.sqf"] call mf_compile;
@@ -35,6 +34,3 @@ mf_items_atm_nearest =
 _condition = "call mf_items_atm_can_access == ''";
 _action = ["<img image='client\icons\suatmm_icon.paa'/> Access ATM", mf_items_atm_access, [], 10, true, true, "", _condition];
 ["atm-access", _action] call mf_player_actions_set;
-
-_action2 = ["<img image='client\icons\suatmm_icon.paa'/> Buy ATM Account", mf_items_atm_buy_account, [], -12, true, true, "", _condition];
-["atm-buy", _action2] call mf_player_actions_set;

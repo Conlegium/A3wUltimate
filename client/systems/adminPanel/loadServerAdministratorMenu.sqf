@@ -25,8 +25,7 @@ if ([_uid, 3] call isAdmin) then {
 	                "Money",
 	                "Debug Menu",
 					"Object Search",
-	                "Toggle God-mode",
-					"Delete Vehicle"
+	                "Toggle God-mode"
 	];
 
 	{

@@ -37,6 +37,6 @@ _itemlist lbSetCurSel -1;
 					_itemlist lbSetData [_listIndex, _x select 1];
 				};
 			};
-		} forEach call allPlayerInventoryItems;
+		} forEach call customPlayerItems;
 	};
 } forEach call mf_inventory_all;

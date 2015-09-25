@@ -16,7 +16,7 @@ _col_mixed = "ColorOrange";
 
 //Creates the markers around gunstores.
 {
-	if (!isPlayer _x && {["GunStore", vehicleVarName _x] call fn_startsWith}) then
+	if (!isPlayer _x && {(vehicleVarName _x) select [0,8] == "GunStore"}) then
 	{
 		_npcPos = getPosATL _x;
 
@@ -51,10 +51,10 @@ _col_mixed = "ColorOrange";
 		// _npcPos set [1, (_npcPos select 1) - 100];
 		_marker = createMarkerLocal [_markerName, _npcPos];
 		_markerName setMarkerShapeLocal "ICON";
-		_markerName setMarkerTypeLocal "o_plane";
+		_markerName setMarkerTypeLocal "mil_dot";
 		_markerName setMarkerColorLocal _col_empty;
 		_markerName setMarkerSizeLocal [1,1];
-		_markerName setMarkerTextLocal "";
+		_markerName setMarkerTextLocal "GUN STORE";
 		// _markerName setMarkerAlphaLocal 0.5;
 
 		_status pushBack "EMPTY";
@@ -74,22 +74,22 @@ _setStatus =
 		case "EMPTY": {
 			_markerNameZone setmarkerColorLocal _col_empty;
 			_markerNameDescription setmarkerColorLocal _col_empty;
-			_markerNameDescription setMarkerTextLocal "";
+			_markerNameDescription setMarkerTextLocal "GUN STORE";
 		};
 		case "ENEMY": {
 			_markerNameZone setmarkerColorLocal _col_enemy;
 			_markerNameDescription setmarkerColorLocal _col_enemy;
-			_markerNameDescription setMarkerTextLocal "Enemies";
+			_markerNameDescription setMarkerTextLocal "GUN STORE (Enemies)";
 		};
 		case "FRIENDLY": {
 			_markerNameZone setmarkerColorLocal _col_friendly;
 			_markerNameDescription setmarkerColorLocal _col_friendly;
-			_markerNameDescription setMarkerTextLocal "Allies";
+			_markerNameDescription setMarkerTextLocal "GUN STORE (Allies)";
 		};
 		case "MIXED": {
 			_markerNameZone setmarkerColorLocal _col_mixed;
 			_markerNameDescription setmarkerColorLocal _col_mixed;
-			_markerNameDescription setMarkerTextLocal "Enemies and Allies";
+			_markerNameDescription setMarkerTextLocal "GUN STORE (Enemies and Allies)";
 		};
 	};
 

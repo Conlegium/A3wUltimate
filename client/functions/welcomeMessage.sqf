@@ -57,6 +57,3 @@ waitUntil {ctrlCommitted _control};
 
 _control ctrlShow false;
 _control ctrlCommit 0;
-
-sleep 5;
-

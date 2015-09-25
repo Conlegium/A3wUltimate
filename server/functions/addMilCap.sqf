@@ -23,5 +23,5 @@ if (leader _unit == _unit) then
 }
 else
 {
-	_unit addHeadgear "H_MilCap_gry";
+	_unit addHeadgear "H_MilCap_mcamo";
 };

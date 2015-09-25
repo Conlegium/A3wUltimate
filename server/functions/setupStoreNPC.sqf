@@ -47,10 +47,6 @@ if (hasInterface) then
 		{
 			_npc addAction ["<img image='client\icons\store.paa'/> Open Vehicle Store", "client\systems\vehicleStore\loadVehicleStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
 		};
-		case (["ktttStore", _npcName] call _startsWith):
-		{
-			_npc addAction ["<img image='client\icons\store.paa'/> Open KTTT Store", "client\systems\ktttStore\loadktttStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
-		};
 	};
 
 	_npc addAction ["<img image='client\icons\money.paa'/> Sell crate", "client\systems\selling\sellCrateItems.sqf", [false, false, true], 0.99, false, true, "", STORE_ACTION_CONDITION + " && " + SELL_CRATE_CONDITION];
@@ -60,7 +56,10 @@ if (hasInterface) then
 
 if (isServer) then
 {
-	_building = nearestBuilding _npc;
+	// nearestBuilding no longer detects barracks since A3 v1.42, so we need this shitty workaround
+	_building = (_npc modelToWorld [0,0,0]) nearestObject "House";
+	if !(_building isKindOf "Land_i_Barracks_V1_F") then { _building = nearestBuilding _npc };
+
 	_npc setVariable ["storeNPC_nearestBuilding", netId _building, true];
 
 	_facesCfg = configFile >> "CfgFaces" >> "Man_A3";
@@ -100,7 +99,8 @@ else
 
 if (isNil "_building" || {isNull _building}) then
 {
-	_building = nearestBuilding _npc;
+	_building = (_npc modelToWorld [0,0,0]) nearestObject "House";
+	if !(_building isKindOf "Land_i_Barracks_V1_F") then { _building = nearestBuilding _npc };
 };
 
 _building allowDamage true;

@@ -21,8 +21,8 @@ class Header
 	minPlayers=1;
 	maxPlayers=145; // 144 players, 1 headless client
 };
-author="K-TTT - based on A3Wasteland.com"; // it would be if you could keep "A3Wasteland.com" in the name, like "YourName and A3Wasteland.com" :)
-onLoadName = "A3wUltimate"; // it would be great if you could keep "A3" in the name, like "ABC A3Wasteland" instead of "ABC Wasteland" :)
+author="AgentRev - A3Wasteland.com"; // it would be if you could keep "A3Wasteland.com" in the name, like "YourName and A3Wasteland.com" :)
+onLoadName = "A3Wasteland Altis"; // it would be great if you could keep "A3" in the name, like "ABC A3Wasteland" instead of "ABC Wasteland" :)
 onLoadMission = "Wasteland is a harsh survival sandbox where two teams and independent players fight for survival.";
 overviewText = "Wasteland is a harsh survival sandbox where two teams and independent players fight for survival.";
 overviewTextLocked = "Wasteland is a harsh survival sandbox where two teams and independent players fight for survival.";
@@ -43,7 +43,6 @@ loadScreen = "mapConfig\Loading.jpg";
 #include "client\systems\groups\dialog\groupManagement.hpp"
 #include "client\systems\gunStore\dialog\gunshop_settings.hpp"
 #include "client\systems\generalStore\dialog\genstore_settings.hpp"
-#include "client\systems\ktttStore\dialog\ktttstore_settings.hpp"
 #include "client\systems\vehicleStore\dialog\vehiclestore_settings.hpp"
 #include "client\systems\adminPanel\dialog\adminMenu.hpp"
 #include "client\systems\adminPanel\dialog\modMenu.hpp"
@@ -55,20 +54,22 @@ loadScreen = "mapConfig\Loading.jpg";
 #include "client\systems\playerMenu\dialog\respawn_dialog.hpp"
 #include "client\systems\playerMenu\dialog\teamkill_dialog.hpp"
 #include "addons\proving_ground\PG_config.hpp"
+#include "addons\outlw_magrepack\config.hpp"
 
 class RscTitles
 {
 	#include "addons\proving_ground\PG_rsctitles.hpp"
+	#include "addons\lsd_nvg\RscTitles.hpp"
 	#include "client\systems\hud\dialog\hud.hpp"
 	#include "client\systems\playerMenu\dialog\welcome.hpp"
 	#include "client\systems\scoreboard\score_gui.hpp"
-	
 };
 
 class CfgFunctions
 {
 	class A3W
 	{
+		#include "client\CfgFunctions.hpp"
 		#include "server\CfgFunctions.hpp"
 	};
 };
@@ -77,20 +78,3 @@ class CfgNotifications
 {
 	#include "client\CfgNotifications.hpp"
 };
-
-class CfgSounds
-{
-	sounds[] =
-	{
-	carsecuresound
-	};
-	
-	class carsecuresound
-	{
-		name = "carsecuresound";
-		sound[] = {client\sounds\carsecuresound.ogg,0.2,1};
-		titles[] = {};
-	};
-	
-	
-}
