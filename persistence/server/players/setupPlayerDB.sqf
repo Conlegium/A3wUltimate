@@ -27,8 +27,9 @@ fn_kickPlayerIfFlagged = "persistence\server\players\fn_kickPlayerIfFlagged.sqf"
 		_data = _this select 2;
 		_player = _this select 3;
 
-		if (!isNull _player && alive _player && !(_player call A3W_fnc_isUnconscious)) then
+		if (!isNull _player && alive _player && _player getVariable ["FAR_isUnconscious", 0] == 0) then
 		{
+			_info pushBack ["BankAccount", _player getVariable ["baccount", 0]];
 			_info pushBack ["BankMoney", _player getVariable ["bmoney", 0]];
 			[_UID, _info, _data] call fn_saveAccount;
 		};
@@ -67,7 +68,14 @@ fn_kickPlayerIfFlagged = "persistence\server\players\fn_kickPlayerIfFlagged.sqf"
 					_player setVariable ["bmoney", _x select 1, true];
 				};
 			} forEach _data;
-
+			
+			{
+				if (_x select 0 == "BankAccount") exitWith
+				{
+					_player setVariable ["baccount", _x select 1, true];
+				};
+			} forEach _data;
+			
 			diag_log format ["pvar_requestPlayerData: %1", [owner _player, _player, objectFromNetId _pNetId]];
 		}] execFSM "call.fsm";
 	};

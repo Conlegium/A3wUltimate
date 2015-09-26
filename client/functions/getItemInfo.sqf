@@ -20,7 +20,7 @@ _showAmmo = false;
 if (isNil "_itemEntry") then
 {
 	{
-		if (_itemData == _x select 1) exitWith
+		if (_itemText == _x select 0 && _itemData == _x select 1) exitWith
 		{
 			_itemEntry = _x;
 			_parentCfg = "CfgWeapons";
@@ -32,7 +32,7 @@ if (isNil "_itemEntry") then
 if (isNil "_itemEntry") then
 {
 	{
-		if (_itemData == _x select 1) exitWith
+		if (_itemText == _x select 0 && _itemData == _x select 1) exitWith
 		{
 			_itemEntry = _x;
 			_parentCfg = "CfgMagazines";
@@ -46,7 +46,7 @@ if (isNil "_itemEntry") then
 		if (!isNil "_itemEntry") exitWith {};
 
 		{
-			if (_itemData == _x select 1) exitWith
+			if (_itemText == _x select 0 && _itemData == _x select 1) exitWith
 			{
 				_itemEntry = _x;
 				_itemType = _x select 3;
@@ -60,7 +60,7 @@ if (isNil "_itemEntry") then
 				};
 			};
 		} forEach (call _x)
-	} forEach [accessoriesArray, genItemArray];
+	} forEach [accessoriesArray, genItemArray, ktttItemArray];
 };
 
 if (isNil "_itemEntry") then
@@ -69,13 +69,13 @@ if (isNil "_itemEntry") then
 		if (!isNil "_itemEntry") exitWith {};
 
 		{
-			if (_itemData == _x select 1) exitWith
+			if (_itemText == _x select 0 && _itemData == _x select 1) exitWith
 			{
 				_itemEntry = _x;
 				_parentCfg = "CfgWeapons";
 			};
 		} forEach (call _x);
-	} forEach [headArray, uniformArray, vestArray];
+	} forEach [headArray, uniformArray, vestArray, ktttHeadArray, ktttUniformArray, ktttVestArray];
 };
 
 if (isNil "_itemEntry") then
@@ -84,13 +84,13 @@ if (isNil "_itemEntry") then
 		if (!isNil "_itemEntry") exitWith {};
 
 		{
-			if (_itemData == _x select 1) exitWith
+			if (_itemText == _x select 0 && _itemData == _x select 1) exitWith
 			{
 				_itemEntry = _x;
 				_parentCfg = "CfgVehicles";
 			};
 		} forEach (call _x);
-	} forEach [backpackArray, genObjectsArray, staticGunsArray];
+	} forEach [backpackArray, genObjectsArray, staticGunsArray, ktttBackpackArray, ktttObjectsArray];
 };
 
 if (!isNil "_itemEntry") then
@@ -130,10 +130,6 @@ if (!isNil "_itemEntry") then
 
 						//_name = getText (_weapon >> "displayName") + " UAV";
 						_description = "Remote-controlled quadcopter to spy on your neighbors, pre-packaged in a backpack.<br/>UAV Terminal sold separately. Ages 8+";
-					};
-					case (["_Static_Designator_", _itemType] call fn_findString != -1):
-					{
-						_description = "Remote-controlled laser designator.<br/>UAV Terminal sold separately.";
 					};
 					default
 					{
@@ -230,7 +226,7 @@ if (isNil "_itemEntry") then
 			_description = _x select 2;
 			_price = _x select 4;
 		};
-	} forEach (call customPlayerItems);
+	} forEach (call allPlayerInventoryItems);
 };
 
 if (_description == "" && {!isNil "_weapon"} && {isClass _weapon}) then

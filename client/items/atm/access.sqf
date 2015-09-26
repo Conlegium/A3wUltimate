@@ -7,6 +7,11 @@
 
 #include "gui_defines.hpp"
 
+if (player getVariable ["baccount", 0] == 0) exitWith 
+{
+	titleText ["You have no personal ATM-Account.", "PLAIN", 0.5];
+};
+		
 ([[],
 {
 	disableSerialization;

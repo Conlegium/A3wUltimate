@@ -64,12 +64,6 @@ switch(_switch) do
 			_excludedItems pushBack "energydrink";
 		};
 
-		if !(["A3W_survivalSystem"] call isConfigOn) then
-		{
-			_excludedItems pushBack "water";
-			_excludedItems pushBack "cannedfood";
-		};
-
 		if (count _excludedItems > 0) then
 		{
 			_itemsArray = [_itemsArray, { !((_x select 1) in _excludedItems) }] call BIS_fnc_conditionalSelect;
@@ -114,24 +108,17 @@ _playerSideNum = switch (playerSide) do
 		{
 			case "CfgVehicles":
 			{
+				_sideCfg = _parentCfg >> _weaponClass >> "side";
+
+				if (isNumber _sideCfg) then
 				{
-					_sideCfg = call _x;
+					_side = getNumber _sideCfg;
 
-					if (isNumber _sideCfg) then
+					if (_side in [0,1,2] && {_side != _playerSideNum}) then
 					{
-						_side = getNumber _sideCfg;
-
-						if (_side in [0,1,2] && {_side != _playerSideNum}) then
-						{
-							_showItem = false;
-						};
+						_showItem = false;
 					};
-				}
-				forEach
-				[
-					{ _parentCfg >> _weaponClass >> "side" },
-					{ configFile >> "CfgVehicles" >> getText (_parentCfg >> _weaponClass >> "assembleInfo" >> "assembleTo") >> "side" }
-				];
+				};
 			};
 			case "CfgWeapons":
 			{
@@ -163,7 +150,7 @@ _playerSideNum = switch (playerSide) do
 
 	if (_showItem) then
 	{
-		_listIndex = _itemlist lbAdd format ["%1", if (!isNil "_parentCfg" && _x select 0 == "") then { getText (_parentCfg >> _weaponClass >> "displayName") } else { _x select 0 }];
+		_listIndex = _itemlist lbAdd format ["%1", _x select 0];
 
 		if (isNil "_parentCfg") then
 		{

@@ -53,7 +53,7 @@ drawPlayerIcons_thread = [] spawn
 				   (_unit != player || cameraOn != vehicle player) &&
 				   {!(_unit getVariable ["playerSpawning", false]) &&
 				   (vehicle _unit != getConnectedUAV player || cameraOn != vehicle _unit) && // do not show UAV AI icons when controlling UAV
-				   {getText (configFile >> "CfgVehicles" >> typeOf _unit >> "simulation") != "headlessclient"}}}) then 
+				   {typeOf _unit != "HeadlessClient_F"}}}) then 
 				{
 					_dist = _unit distance positionCameraToWorld [0,0,0];
 					_pos = _unit modelToWorldVisual [0, 0, 1.35]; // Torso height
@@ -66,13 +66,13 @@ drawPlayerIcons_thread = [] spawn
 						_icon = _teamIcon;
 						_size = 0;
 
-						if (_unit call A3W_fnc_isUnconscious) then
+						if (_unit getVariable ["FAR_isUnconscious", 0] == 1) then
 						{
 							_icon = _reviveIcon;
 							_size = (2 - ((_dist / ICON_limitDistance) * 0.8)) * _uiScale;
 
 							// Revive icon blinking code
-							if (_unit call A3W_fnc_isBleeding) then
+							if (_unit getVariable ["FAR_isStabilized", 0] == 0) then
 							{
 								_blink = false;
 								_timestamp = _unit getVariable ["FAR_iconBlinkTimestamp", 0];

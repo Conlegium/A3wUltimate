@@ -36,7 +36,6 @@ fn_removeAllManagedActions = "client\functions\fn_removeAllManagedActions.sqf" c
 fn_removeManagedAction = "client\functions\fn_removeManagedAction.sqf" call mf_compile;
 fn_forceOpenParachute = "client\functions\fn_forceOpenParachute.sqf" call mf_compile;
 fn_openParachute = "client\functions\fn_openParachute.sqf" call mf_compile;
-fn_voiceChatControl = "client\functions\fn_voiceChatControl.sqf" call mf_compile;
 getDefaultClothing = "client\functions\getDefaultClothing.sqf" call mf_compile;
 getFullMove = "client\functions\getFullMove.sqf" call mf_compile;
 getMoveParams = "client\functions\getMoveParams.sqf" call mf_compile;
@@ -70,6 +69,11 @@ spawnRandom = "client\functions\spawnRandom.sqf" call mf_compile;
 // refuelVehicle = "client\systems\playerMenu\refuel.sqf" call mf_compile;
 // repairVehicle = "client\systems\playerMenu\repair.sqf" call mf_compile;
 
+//K-TTT Functions - THANKS to wiking-at
+fn_customUniforms = "addons\customuniforms\customUniforms.sqf" call mf_compile;
+//K-TTT Animal Catching
+fn_catchAnimal = "client\actions\catchAnimal.sqf" call mf_compile;
+
 // Sync client with server time
 timeSync = "client\functions\clientTimeSync.sqf" call mf_compile;
 
@@ -84,6 +88,7 @@ teamkillMessage = "client\functions\showTeamKillMessage.sqf" call mf_compile;
 client_respawnDialog = "client\systems\playerMenu\dialog\loadRespawnDialog.sqf" call mf_compile;
 fn_respawnTimer = "client\systems\scoreboard\fn_respawnTimer.sqf" call mf_compile;
 loadGeneralStore = "client\systems\generalStore\loadGenStore.sqf" call mf_compile;
+loadktttStore = "client\systems\ktttStore\loadktttStore.sqf" call mf_compile;
 loadGunStore = "client\systems\gunStore\loadGunStore.sqf" call mf_compile;
 loadScoreboard = "client\systems\scoreboard\loadScoreboard.sqf" call mf_compile;
 loadVehicleStore = "client\systems\vehicleStore\loadVehicleStore.sqf" call mf_compile;
@@ -91,8 +96,10 @@ gearProperties = "client\functions\gearProperties.sqf" call mf_compile;
 getCapacity = "client\functions\getCapacity.sqf" call mf_compile;
 getItemInfo = "client\functions\getItemInfo.sqf" call mf_compile;
 getInventory = "client\systems\generalStore\getInventory.sqf" call mf_compile;
+getktttInventory = "client\systems\ktttStore\getInventory.sqf" call mf_compile;
 getSellPriceList = "client\systems\selling\getSellPriceList.sqf" call mf_compile;
 populateGeneralStore = "client\systems\generalStore\populateGenStore.sqf" call mf_compile;
+populatektttStore = "client\systems\ktttStore\populatektttStore.sqf" call mf_compile;
 populateGunStore = "client\systems\gunStore\populateGunStore.sqf" call mf_compile;
 populateVehicleStore = "client\systems\vehicleStore\populateVehicleStore.sqf" call mf_compile;
 requestStoreObject = "client\functions\requestStoreObject.sqf" call mf_compile;

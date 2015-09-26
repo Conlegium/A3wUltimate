@@ -35,7 +35,7 @@ _objects = call compile preprocessFileLineNumbers format ["%1\getObjects.sqf", _
 _exclObjectIDs = [];
 
 {
-	private ["_allowed", "_obj", "_objectID", "_class", "_pos", "_dir", "_locked", "_damage", "_allowDamage", "_owner", "_variables", "_weapons", "_magazines", "_items", "_backpacks", "_turretMags", "_ammoCargo", "_fuelCargo", "_repairCargo", "_hoursAlive", "_valid"];
+	private ["_allowed", "_obj", "_objectID", "_class", "_pos", "_dir", "_locked", "_damage", "_allowDamage", "_variables", "_weapons", "_magazines", "_items", "_backpacks", "_turretMags", "_ammoCargo", "_fuelCargo", "_repairCargo", "_hoursAlive", "_valid"];
 
 	{ (_x select 1) call compile format ["%1 = _this", _x select 0]	} forEach _x;
 
@@ -64,8 +64,6 @@ _exclObjectIDs = [];
 		{ if (typeName _x == "STRING") then { _pos set [_forEachIndex, parseNumber _x] } } forEach _pos;
 
 		_obj = createVehicle [_class, _pos, [], 0, "None"];
-		_obj allowDamage false;
-		_obj hideObjectGlobal true;
 		_obj setPosWorld ATLtoASL _pos;
 
 		if (!isNil "_dir") then
@@ -79,7 +77,6 @@ _exclObjectIDs = [];
 		if (!isNil "_objectID") then
 		{
 			_obj setVariable ["A3W_objectID", _objectID, true];
-			_obj setVariable ["A3W_objectSaved", true, true];
 			A3W_objectIDs pushBack _objectID;
 		};
 
@@ -89,14 +86,12 @@ _exclObjectIDs = [];
 
 		if (_allowDamage > 0) then
 		{
-			_obj allowDamage true;
 			_obj setDamage _damage;
 			_obj setVariable ["allowDamage", true];
-		};
-
-		if (!isNil "_owner") then
+		}
+		else
 		{
-			_obj setVariable ["ownerUID", _owner, true];
+			_obj allowDamage false;
 		};
 
 		{
@@ -145,53 +140,49 @@ _exclObjectIDs = [];
 			default { false };
 		};
 
-		if (_unlock) then
+		if (_unlock) exitWith
 		{
 			_obj setVariable ["objectLocked", false, true];
-		}
-		else
-		{
-			if (_boxSavingOn && {_class call _isBox}) then
-			{
-				if (!isNil "_weapons") then
-				{
-					{ _obj addWeaponCargoGlobal _x } forEach _weapons;
-				};
-				if (!isNil "_magazines") then
-				{
-					[_obj, _magazines] call processMagazineCargo;
-				};
-				if (!isNil "_items") then
-				{
-					{ _obj addItemCargoGlobal _x } forEach _items;
-				};
-				if (!isNil "_backpacks") then
-				{
-					{
-						_bpack = _x select 0;
-
-						if (!(_bpack isKindOf "Weapon_Bag_Base") || {{_bpack isKindOf _x} count ["B_UAV_01_backpack_F", "B_Static_Designator_01_weapon_F", "O_Static_Designator_02_weapon_F"] > 0}) then
-						{
-							_obj addBackpackCargoGlobal _x;
-						};
-					} forEach _backpacks;
-				};
-			};
-
-			if (!isNil "_turretMags" && _staticWeaponSavingOn && {_class call _isStaticWeapon}) then
-			{
-				_obj setVehicleAmmo 0;
-				{ _obj addMagazine _x } forEach _turretMags;
-			};
-
-			if (!isNil "_ammoCargo") then { _obj setAmmoCargo _ammoCargo };
-			if (!isNil "_fuelCargo") then { _obj setFuelCargo _fuelCargo };
-			if (!isNil "_repairCargo") then { _obj setRepairCargo _repairCargo };
-
-			reload _obj;
 		};
 
-		_obj hideObjectGlobal false;
+		if (_boxSavingOn && {_class call _isBox}) then
+		{
+			if (!isNil "_weapons") then
+			{
+				{ _obj addWeaponCargoGlobal _x } forEach _weapons;
+			};
+			if (!isNil "_magazines") then
+			{
+				[_obj, _magazines] call processMagazineCargo;
+			};
+			if (!isNil "_items") then
+			{
+				{ _obj addItemCargoGlobal _x } forEach _items;
+			};
+			if (!isNil "_backpacks") then
+			{
+				{
+					_bpack = _x select 0;
+
+					if (!(_bpack isKindOf "Weapon_Bag_Base") || {_bpack isKindOf "B_UAV_01_backpack_F"}) then
+					{
+						_obj addBackpackCargoGlobal _x;
+					};
+				} forEach _backpacks;
+			};
+		};
+
+		if (!isNil "_turretMags" && _staticWeaponSavingOn && {_class call _isStaticWeapon}) then
+		{
+			_obj setVehicleAmmo 0;
+			{ _obj addMagazine _x } forEach _turretMags;
+		};
+
+		if (!isNil "_ammoCargo") then { _obj setAmmoCargo _ammoCargo };
+		if (!isNil "_fuelCargo") then { _obj setFuelCargo _fuelCargo };
+		if (!isNil "_repairCargo") then { _obj setRepairCargo _repairCargo };
+
+		reload _obj;
 	};
 
 	if (!_valid && !isNil "_objectID") then
@@ -212,4 +203,5 @@ if (_warchestMoneySavingOn) then
 
 diag_log format ["A3Wasteland - world persistence loaded %1 objects from %2", _objCount, call A3W_savingMethodName];
 
+fn_deleteObjects = [_methodDir, "deleteObjects.sqf"] call mf_compile;
 _exclObjectIDs call fn_deleteObjects;

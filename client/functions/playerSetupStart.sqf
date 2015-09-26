@@ -19,6 +19,9 @@ if (["A3W_unlimitedStamina"] call isConfigOn) then
 	_player enableFatigue false;
 };
 
+//K-TTT- Spawn Script for Custom Player uniforms - THANKS to wiking-at
+[] spawn fn_customUniforms;
+
 enableSentences false;
 
 removeAllWeapons _player;

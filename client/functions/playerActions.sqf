@@ -18,7 +18,18 @@
 	["<img image='\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\transport_ca.paa'/> <t color='#FFFFFF'>Cancel Action</t>", { doCancelAction = true }, [], 1, false, false, "", "mutexScriptInProgress"],
 
 	["<img image='client\icons\repair.paa'/> Salvage", "client\actions\salvage.sqf", [], 1.1, false, false, "", "!isNull cursorTarget && !alive cursorTarget && {cursorTarget isKindOf 'AllVehicles' && !(cursorTarget isKindOf 'Man') && player distance cursorTarget <= (sizeOf typeOf cursorTarget / 3) max 2}"],
-
+	
+	["<img image='client\icons\VehUnsecure.paa'/> Open up Vehicle", "client\actions\VehUnsecure.sqf", [cursorTarget], 1,false,false,"","!isNull cursorTarget && alive cursorTarget && vehicle player == player && {{ cursorTarget isKindOf _x } count ['LandVehicle', 'Ship', 'Air'] > 0 ;} && cursorTarget getVariable ['ownerUID',''] == getPlayerUID player && locked cursorTarget >= 2 && cursorTarget distance player < 7"],
+	["<img image='client\icons\VehSecure.paa'/> Secure Vehicle", "client\actions\VehSecure.sqf", [cursorTarget], 1,false,false,"","!isNull cursorTarget && alive cursorTarget && vehicle player == player && {{ cursorTarget isKindOf _x } count ['LandVehicle', 'Ship', 'Air'] > 0 ;} && {{ cursorTarget isKindOf _x } count ['StaticWeapon'] == 0 ;} && cursorTarget getVariable ['ownerUID',''] == getPlayerUID player && locked cursorTarget < 2 && cursorTarget distance player < 7"],
+	
+	["<t color='#B80000'>Register Ownership</t>", "addons\kttt\changeowner.sqf", [], 51, false, false, "", "(['LICENSE_OFFICE_WEST', getpos player] call BIS_fnc_inTrigger || ['LICENSE_OFFICE_NORTHEAST', getpos player] call BIS_fnc_inTrigger || ['LICENSE_OFFICE_SOUTHEAST', getpos player] call BIS_fnc_inTrigger) && !(vehicle player == player) && ((vehicle player) isKindOf 'Air' ||( vehicle player) isKindOf 'LandVehicle' || (vehicle player) isKindOf 'Ship')"],
+	
+	["<t color='#B80000'>Chop Vehicle</t>", "addons\kttt\chopshop.sqf", [], 51, false, false, "", "(['CHOPSHOP_MARKER', getpos player] call BIS_fnc_inTrigger) && !(vehicle player == player) && ((vehicle player) isKindOf 'Air' ||( vehicle player) isKindOf 'LandVehicle' || (vehicle player) isKindOf 'Ship')"],
+	
+	["<t color='#009EEC'>Catch Animal</t>", "client\functions\checkAnimal.sqf", [], 61,false,false,"","count nearestObjects[getPos player,['Animal_Base_F'],3] > 0"],
+	
+	["<img image='client\icons\fireextinguisher.paa'/> <t color='#FF0D00'>Extinguish</t>", "addons\kttt\firefight.sqf", [], 41, false, false, "", "!isNull cursorTarget && !alive cursorTarget && {cursorTarget isKindOf 'AllVehicles' && !(cursorTarget isKindOf 'Man') && !(MF_ITEMS_FIRE_EXTINGUISHER call mf_inventory_count <= 0)}"],
+	
 	["[0]"] call getPushPlaneAction,
 	["Push vehicle", "server\functions\pushVehicle.sqf", [2.5, true], 1, false, false, "", "[2.5] call canPushVehicleOnFoot"],
 	["Push vehicle forward", "server\functions\pushVehicle.sqf", [2.5], 1, false, false, "", "[2.5] call canPushWatercraft"],

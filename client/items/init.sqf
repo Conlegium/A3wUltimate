@@ -15,6 +15,13 @@
 [_this, "camonet"] call mf_init;
 [_this, "warchest"] call mf_init;
 [_this, "cratemoney"] call mf_init;
+[_this, "campfire"] call mf_init;
+[_this, "bankbook"] call mf_init;
+[_this, "missionreward"] call mf_init;
+[_this, "missionrewardexchange"] call mf_init;
+[_this, "animalcatching"] call mf_init;
+[_this, "drugs"] call mf_init;
+[_this, "extinguisher"] call mf_init;
 
 if (["A3W_atmEnabled"] call isConfigOn) then
 {

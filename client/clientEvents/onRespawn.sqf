@@ -10,7 +10,6 @@
 private ["_player", "_corpse"];
 
 playerSetupComplete = false;
-playerSpawning = true;
 
 9999 cutText ["", "BLACK", 0.01];
 9123 cutRsc ["RscEmpty", "PLAIN"];
@@ -21,7 +20,7 @@ _corpse = _this select 1;
 _corpse setVariable ["newRespawnedUnit", _player, true];
 _player setVariable ["playerSpawning", true, true];
 
-pvar_playerRespawn = _this;
+pvar_playerRespawn = _player;
 publicVariableServer "pvar_playerRespawn";
 
 _group = _player getVariable ["currentGroupRestore", grpNull];

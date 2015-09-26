@@ -9,7 +9,7 @@
 
 //Creates the markers around vehicle stores.
 {
-	if (!isPlayer _x && {(vehicleVarName _x) select [0,8] == "VehStore"}) then
+	if (!isPlayer _x && {["VehStore", vehicleVarName _x] call fn_startsWith}) then
 	{
 		_npcPos = getPosATL _x;
 
@@ -18,9 +18,9 @@
 		deleteMarkerLocal _markerName;
 		_marker = createMarkerLocal [_markerName, _npcPos];
 		_markerName setMarkerShapeLocal "ICON";
-		_markerName setMarkerTypeLocal "mil_dot";
+		_markerName setMarkerTypeLocal "o_mech_inf";
 		_markerName setMarkerColorLocal "ColorOrange";
 		_markerName setMarkerSizeLocal [1,1];
-		_markerName setMarkerTextLocal "Vehicle Store";
+		_markerName setMarkerTextLocal "";
 	};
 } forEach entities "CAManBase";
