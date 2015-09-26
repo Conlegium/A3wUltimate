@@ -82,6 +82,7 @@ if (hasInterface || isServer) then
 	//init 3rd Party Scripts
 	[] execVM "addons\R3F_ARTY_AND_LOG\init.sqf";
 	[] execVM "addons\proving_ground\init.sqf";
+	[] execVM "addons\scripts\DynamicWeatherEffects.sqf";
 	[] execVM "addons\JumpMF\init.sqf";
 	[] execVM "addons\outlw_magRepack\MagRepack_init.sqf";
 	[] execVM "addons\lsd_nvg\init.sqf";
