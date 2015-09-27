@@ -15,7 +15,7 @@ _setupVars =
 {
 	////////////////////////////////////// GET AMOUNT OF DEFENDING GROUP //////////////////////////////////////
 	_nbUnits = AI_GROUP_LARGE;					//_nbUnits (AI_GROUP_LARGE) in RareMissionDefines = 55 Soldiers
-	_nbUnitStart = (_nbUnits) - 39;				// 55-39=16 :D
+	_nbUnitStart = (_nbUnits) - 31;				// 55-39=16 :D
 	_nbUnitFinal = _nbUnitStart + round(random 16);	// 16+(something up to 16)= max.32
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	_locArray = ((call cityList) call BIS_fnc_selectRandom);
