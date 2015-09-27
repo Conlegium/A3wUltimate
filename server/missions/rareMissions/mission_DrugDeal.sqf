@@ -16,7 +16,7 @@ _setupVars =
 {
 	////////////////////////////////////// GET AMOUNT OF GROUP ////////////////////////////////////////////////
 	_nbUnits = AI_GROUP_LARGE;					//_nbUnits (AI_GROUP_LARGE) in RareMissionDefines = 55 Soldiers
-	_nbUnitStart = (_nbUnits) - 50;				// 55-50=5 :D
+	_nbUnitStart = (_nbUnits);				// 55-50=5 :D
 	_nbUnitFinal = _nbUnitStart + round(random 6);	// 5+(something up to 6)= max. 11
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	_locArray = ((call cityList) call BIS_fnc_selectRandom);

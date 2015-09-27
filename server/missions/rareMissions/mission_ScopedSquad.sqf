@@ -26,25 +26,25 @@ _setupObjects =
 		[
 			"Small Sniper Squad", // Marker text
 			24000, // Money
-			(_nbUnits) - 50
+			(_nbUnits) - 12
 		],
 		// Medium
 		[
 			"Medium Sniper Squad", // Marker text
 			48000, // Money
-			(_nbUnits) - 45
+			(_nbUnits) - 12
 		],
 		// Large
 		[
 			"Large Sniper Squad", // Marker text
 			72000, // Money
-			(_nbUnits) - 40
+			(_nbUnits) - 12
 		],
 		// Heavy
 		[
 			"Heavy Sniper Squad", // Marker text
 			96000, // Money
-			(_nbUnits) - 35
+			(_nbUnits) - 12
 		]
 	]
 	call BIS_fnc_selectRandom;
