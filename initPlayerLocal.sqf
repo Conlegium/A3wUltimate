@@ -8,3 +8,6 @@ if (!isServer) then
 {
 	"BIS_fnc_MP_packet" addPublicVariableEventHandler compileFinal preprocessFileLineNumbers "server\antihack\filterExecAttempt.sqf";
 };
+[] execVM "addons\statusBar\statusbar.sqf"; 
+
+if (!hasInterface || isServer) exitWith {};
